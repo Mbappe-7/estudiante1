@@ -1,0 +1,21 @@
+{% extends "estudiantes/base.html" %}
+
+{% block title %}Programa: {{ programa.nombre }}{% endblock %}
+
+{% block content %}
+<h1>Detalle del Programa</h1>
+
+<p><strong>Nombre:</strong> {{ programa.nombre }}</p>
+<p><strong>Descripción:</strong> {{ programa.descripcion }}</p>
+<p><strong>Estado:</strong> {{ programa.estado }}</p>
+
+<h3>Materias del programa</h3>
+<ul>
+    {% for materia in programa.materias.all %}
+        <li>{{ materia.nombre }} (Profesor: {{ materia.profesor }})</li>
+    {% empty %}
+        <li>No hay materias registradas en este programa.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

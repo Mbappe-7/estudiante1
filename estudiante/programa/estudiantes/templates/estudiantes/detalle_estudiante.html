@@ -1,0 +1,20 @@
+{% extends "estudiantes/base.html" %}
+
+{% block title %}Estudiante: {{ estudiante.nombre }}{% endblock %}
+
+{% block content %}
+<h1>Detalle del Estudiante</h1>
+
+<p><strong>Nombre:</strong> {{ estudiante.nombre }}</p>
+<p><strong>Edad:</strong> {{ estudiante.edad }}</p>
+
+<h3>Materias</h3>
+<ul>
+    {% for materia in estudiante.materias.all %}
+        <li>{{ materia.nombre }} (Profesor: {{ materia.profesor }})</li>
+    {% empty %}
+        <li>Este estudiante no tiene materias asignadas.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

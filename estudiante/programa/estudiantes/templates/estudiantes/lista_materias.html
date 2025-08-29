@@ -1,0 +1,22 @@
+{% extends "estudiantes/base.html" %}
+
+{% block title %}Materias{% endblock %}
+
+{% block content %}
+<h1>Materias</h1>
+
+<ul>
+    {% for mat in materias %}
+    <li>
+        <a href="{% url 'estudiantes:detalle_materia' mat.pk %}">
+            {{ mat.nombre }}
+        </a>
+        - Profesor: {{ mat.profesor }}
+        - Programa: {{ mat.programa.nombre }}
+        - Estudiantes inscritos: {{ mat.estudiantes.count }}
+    </li>
+    {% empty %}
+    <li>No hay materias registradas.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

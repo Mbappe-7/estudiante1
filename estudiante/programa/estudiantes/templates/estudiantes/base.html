@@ -1,0 +1,17 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Gestión de Estudiantes{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}?">
+</head>
+<body>
+    {% include "estudiantes/partials/navbar.html" %}
+
+    <main class="container">
+        {% block content %}{% endblock content %}
+    </main>
+</body>
+</html>
