@@ -9,12 +9,26 @@
 <p><strong>Edad:</strong> {{ estudiante.edad }}</p>
 
 <h3>Materias</h3>
-<ul>
-    {% for materia in estudiante.materias.all %}
-        <li>{{ materia.nombre }} (Profesor: {{ materia.profesor }})</li>
-    {% empty %}
-        <li>Este estudiante no tiene materias asignadas.</li>
-    {% endfor %}
-</ul>
+
+<table class="table-custom" border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; color: #fff; background-color: #333;box-shadow: 0 4px 8px rgba(0, 0, 0, 3);">
+    <thead style="background-color: #e84d13;">
+        <tr>
+            <th>Nombre de la Materia</th>
+            <th>Profesor</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for materia in estudiante.materias.all %}
+        <tr>
+            <td>{{ materia.nombre }}</td>
+            <td>{{ materia.profesor }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">Este estudiante no tiene materias asignadas.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}

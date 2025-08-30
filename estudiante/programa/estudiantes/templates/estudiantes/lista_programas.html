@@ -5,17 +5,30 @@
 {% block content %}
 <h1>Programas</h1>
 
-<ul>
-    {% for prog in programas %}
-    <li>
-        <a href="{% url 'estudiantes:detalle_programa' prog.pk %}">
-            {{ prog.nombre }}
-        </a>
-        - Estado: {{ prog.estado }}
-        - Materias: {{ prog.materias.count }}
-    </li>
-    {% empty %}
-    <li>No hay programas registrados.</li>
-    {% endfor %}
-</ul>
+<table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; color: #fff; background-color: #333; box-shadow: 0 4px 8px rgba(0, 0, 0, 3);">
+    <thead style="background-color: #e84d13;">
+        <tr>
+            <th>Nombre</th>
+            <th>Estado</th>
+            <th># Materias</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prog in programas %}
+        <tr>
+            <td>
+                <a style="color: #fff;" href="{% url 'estudiantes:detalle_programa' prog.pk %}">
+                    {{ prog.nombre }}
+                </a>
+            </td>
+            <td>{{ prog.estado }}</td>
+            <td>{{ prog.materias.count }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">No hay programas registrados.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

@@ -5,18 +5,32 @@
 {% block content %}
 <h1>Materias</h1>
 
-<ul>
-    {% for mat in materias %}
-    <li>
-        <a href="{% url 'estudiantes:detalle_materia' mat.pk %}">
-            {{ mat.nombre }}
-        </a>
-        - Profesor: {{ mat.profesor }}
-        - Programa: {{ mat.programa.nombre }}
-        - Estudiantes inscritos: {{ mat.estudiantes.count }}
-    </li>
-    {% empty %}
-    <li>No hay materias registradas.</li>
-    {% endfor %}
-</ul>
+<table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; color: #fff; background-color: #333; box-shadow: 0 4px 8px rgba(0, 0, 0, 3);">
+    <thead style="background-color: #e84d13;">
+        <tr>
+            <th>Nombre</th>
+            <th>Profesor</th>
+            <th>Programa</th>
+            <th># Estudiantes Inscritos</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for mat in materias %}
+        <tr>
+            <td>
+                <a style="color: #fff;" href="{% url 'estudiantes:detalle_materia' mat.pk %}">
+                    {{ mat.nombre }}
+                </a>
+            </td>
+            <td>{{ mat.profesor }}</td>
+            <td>{{ mat.programa.nombre }}</td>
+            <td>{{ mat.estudiantes.count }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No hay materias registradas.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

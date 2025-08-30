@@ -10,12 +10,26 @@
 <p><strong>Programa:</strong> {{ materia.programa }}</p>
 
 <h3>Estudiantes inscritos en esta materia</h3>
-<ul>
-    {% for estudiante in materia.estudiantes.all %}
-        <li>{{ estudiante.nombre }} (Edad: {{ estudiante.edad }})</li>
-    {% empty %}
-        <li>No hay estudiantes inscritos en esta materia.</li>
-    {% endfor %}
-</ul>
+
+<table class="table-custom" border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; color: #fff; background-color: #333;box-shadow: 0 4px 8px rgba(0, 0, 0, 3);">
+    <thead style="background-color: #e84d13;">
+        <tr>
+            <th>Nombre del Estudiante</th>
+            <th>Edad</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for estudiante in materia.estudiantes.all %}
+        <tr>
+            <td>{{ estudiante.nombre }}</td>
+            <td>{{ estudiante.edad }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">No hay estudiantes inscritos en esta materia.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}

@@ -5,17 +5,30 @@
 {% block content %}
 <h1>Estudiantes</h1>
 
-<ul>
-    {% for est in estudiantes %}
-    <li>
-        <a href="{% url 'estudiantes:detalle_estudiante' est.pk %}">
-            {{ est.nombre }}
-        </a>
-        - Edad: {{ est.edad }}
-        - Materias inscritas: {{ est.materias.count }}
-    </li>
-    {% empty %}
-    <li>No hay estudiantes registrados.</li>
-    {% endfor %}
-</ul>
+<table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; color: #fff; background-color: #333;box-shadow: 0 4px 8px rgba(0, 0, 0, 3);">
+    <thead style="background-color: #e84d13;">
+        <tr>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th># Materias Inscritas</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for est in estudiantes %}
+        <tr>
+            <td>
+                <a style="color: #fff;" href="{% url 'estudiantes:detalle_estudiante' est.pk %}">
+                    {{ est.nombre }}
+                </a>
+            </td>
+            <td>{{ est.edad }}</td>
+            <td>{{ est.materias.count }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3" style="text-align: center;">No hay estudiantes registrados.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

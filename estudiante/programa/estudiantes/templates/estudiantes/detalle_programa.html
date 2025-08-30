@@ -10,12 +10,26 @@
 <p><strong>Estado:</strong> {{ programa.estado }}</p>
 
 <h3>Materias del programa</h3>
-<ul>
-    {% for materia in programa.materias.all %}
-        <li>{{ materia.nombre }} (Profesor: {{ materia.profesor }})</li>
-    {% empty %}
-        <li>No hay materias registradas en este programa.</li>
-    {% endfor %}
-</ul>
+
+<table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; color: #fff; background-color: #333; box-shadow: 0 4px 8px rgba(0, 0, 0, 3);">
+    <thead style="background-color: #e84d13;">
+        <tr>
+            <th>Nombre de la Materia</th>
+            <th>Profesor</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for materia in programa.materias.all %}
+        <tr>
+            <td>{{ materia.nombre }}</td>
+            <td>{{ materia.profesor }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">No hay materias registradas en este programa.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}
