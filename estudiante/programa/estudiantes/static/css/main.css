@@ -99,3 +99,11 @@ table{
     color: #721c24;
 
 }
+
+.btn {
+    border-radius: 50%;
+    padding: 8px 16px;
+    background-color: #e84d13; 
+    color: #fff;
+    text-decoration: none;
+}

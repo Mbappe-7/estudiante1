@@ -1,6 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Programa, Materia, Estudiante
-
+from .forms import ProgramaForm
 def home(request):
     return render(request, "estudiantes/home.html", {})
 
@@ -43,3 +43,36 @@ def detalle_estudiante(request, pk):
         pk=pk
     )
     return render(request, "estudiantes/detalle_estudiante.html", {"estudiante": estudiante})
+
+def crear_programa(request):
+    if request.method == "POST":
+        form = ProgramaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("estudiantes:lista_programa")
+    else:
+        form= ProgramaForm()
+    return render(request, "estudiantes/crear_programa.html",{"form": form})
+
+def editar_programa(request, pk):
+    programa = get_object_or_404(Programa, pk=pk)
+
+    if request.method == "POST":
+        form = ProgramaForm(request.POST, instance=programa)
+        if form.is_valid():
+            form.save()
+            return redirect("estudiates:detalle_programa", pk=programa.pk)
+        else:
+            form =ProgramaForm(instance=programa)
+
+        return render(request, "estudiantes/editar_programa.html", {"from": form})
+    
+def eliminar_programa(request, pk):
+    programa = get_object_or_404(Programa, pk=pk)
+
+    if request.method == "POST":  
+        programa.delete()
+        return redirect("estudiantes:lista_programa")
+
+    # si es GET, mostrar confirmación
+    return render(request, "estudiantes/eliminar_programa.html", {"programa": programa})

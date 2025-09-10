@@ -1,0 +1,17 @@
+{% extends "estudiantes/base.html" %}
+
+{% block title %}Editar: {{ programa.nombre }}{% endblock %}
+
+{% block content %}
+<h1>Editar Programa</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn">Actualizar</button>
+</form>
+
+<p>
+    <a href="{% url 'estudiantes:detalle_programa' programa.pk %}">Volver</a>
+</p>
+{% endblock %}
