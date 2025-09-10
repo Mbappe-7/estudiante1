@@ -49,7 +49,7 @@ def crear_programa(request):
         form = ProgramaForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("estudiantes:lista_programa")
+            return redirect("estudiantes:lista_programas")
     else:
         form= ProgramaForm()
     return render(request, "estudiantes/crear_programa.html",{"form": form})
@@ -62,17 +62,17 @@ def editar_programa(request, pk):
         if form.is_valid():
             form.save()
             return redirect("estudiates:detalle_programa", pk=programa.pk)
-        else:
-            form =ProgramaForm(instance=programa)
-
-        return render(request, "estudiantes/editar_programa.html", {"from": form})
+    else:
+        form =ProgramaForm(instance=programa)
+        
+    return render(request, "estudiantes/editar_programa.html", {"form": form, "programa": programa})
     
 def eliminar_programa(request, pk):
     programa = get_object_or_404(Programa, pk=pk)
 
     if request.method == "POST":  
         programa.delete()
-        return redirect("estudiantes:lista_programa")
+        return redirect("estudiantes:lista_programas")
 
     # si es GET, mostrar confirmación
     return render(request, "estudiantes/eliminar_programa.html", {"programa": programa})
