@@ -25,7 +25,7 @@ class Materia(models.Model):
         related_name="materias"
     )
 
-    def _str_(self): 
+    def __str__(self): 
         return f"{self.nombre} ({self.programa.nombre})"
 
 

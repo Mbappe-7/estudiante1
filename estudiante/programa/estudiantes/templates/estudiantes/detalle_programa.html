@@ -32,9 +32,8 @@
     </tbody>
 </table>
 <p>
-    <a href="{% url 'estudiantes:editar_programa' programa.pk %}" class="btn">Editar Programa✏️</a>
-</p>
-<p>
-    <a href="{% url 'estudiantes:eliminar_programa' programa.pk %}" class="btn">Eliminar Programa✏️</a>
+    <a href="{% url 'estudiantes:editar_programa' programa.pk %}" class="btn">Editar Programa✏️</a> |
+    <a href="{% url 'estudiantes:eliminar_programa' programa.pk %}" class="btn">Eliminar Programa🗑️</a> |
+    <a href="{% url 'estudiantes:lista_programas' %}" class="btn">⬅️ Volver</a>
 </p>
 {% endblock %}

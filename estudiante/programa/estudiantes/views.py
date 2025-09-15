@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Programa, Materia, Estudiante
-from .forms import ProgramaForm
+from .forms import ProgramaForm, EstudianteForm
 def home(request):
     return render(request, "estudiantes/home.html", {})
 
@@ -43,7 +43,7 @@ def detalle_estudiante(request, pk):
         pk=pk
     )
     return render(request, "estudiantes/detalle_estudiante.html", {"estudiante": estudiante})
-
+# -------------------------------------------------
 def crear_programa(request):
     if request.method == "POST":
         form = ProgramaForm(request.POST)
@@ -76,3 +76,43 @@ def eliminar_programa(request, pk):
 
     # si es GET, mostrar confirmación
     return render(request, "estudiantes/eliminar_programa.html", {"programa": programa})
+#------------------------------------------------
+def lista_estudiantes(request):
+    estudiantes = Estudiante.objects.all()
+    return render(request, "estudiantes/lista_estudiantes.html", {"estudiantes": estudiantes})
+
+# CREAR
+def crear_estudiante(request):
+    if request.method == "POST":
+        form = EstudianteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("estudiantes:lista_estudiantes")
+    else:
+        form = EstudianteForm()
+    return render(request, "estudiantes/crear_estudiante.html", {"form": form})
+
+# DETALLE
+def detalle_estudiante(request, pk):
+    estudiante = get_object_or_404(Estudiante, pk=pk)
+    return render(request, "estudiantes/detalle_estudiante.html", {"estudiante": estudiante})
+
+# EDITAR
+def editar_estudiante(request, pk):
+    estudiante = get_object_or_404(Estudiante, pk=pk)
+    if request.method == "POST":
+        form = EstudianteForm(request.POST, instance=estudiante)
+        if form.is_valid():
+            form.save()
+            return redirect("estudiantes:detalle_estudiante", pk=estudiante.pk)
+    else:
+        form = EstudianteForm(instance=estudiante)
+    return render(request, "estudiantes/editar_estudiante.html", {"form": form, "estudiante": estudiante})
+
+# ELIMINAR
+def eliminar_estudiante(request, pk):
+    estudiante = get_object_or_404(Estudiante, pk=pk)
+    if request.method == "POST":
+        estudiante.delete()
+        return redirect("estudiantes:lista_estudiantes")
+    return render(request, "estudiantes/eliminar_estudiante.html", {"estudiante": estudiante})

@@ -20,4 +20,9 @@ urlpatterns = [
     path("programa/nuevo/", views.crear_programa, name="crear_programa"),
     path("programa/<int:pk>/editar/", views.editar_programa, name="editar_programa"),
     path("programa/<int:pk>/eliminar/", views.eliminar_programa, name="eliminar_programa"),
+
+    path("estudiantes/nuevo/", views.crear_estudiante, name="crear_estudiante"),
+    
+    path("estudiantes/<int:pk>/editar/", views.editar_estudiante, name="editar_estudiante"),
+    path("estudiantes/<int:pk>/eliminar/", views.eliminar_estudiante, name="eliminar_estudiante"),
 ]

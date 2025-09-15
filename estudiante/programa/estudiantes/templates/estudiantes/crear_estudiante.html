@@ -1,0 +1,11 @@
+{% extends "estudiantes/base.html" %}
+
+{% block content %}
+<h1>Crear Estudiante</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn">Guardar</button>
+</form>
+<p><a href="{% url 'estudiantes:lista_estudiantes' %}">Volver a la lista</a></p>
+{% endblock %}
