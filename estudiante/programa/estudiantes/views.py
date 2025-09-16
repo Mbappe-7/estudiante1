@@ -61,7 +61,7 @@ def editar_programa(request, pk):
         form = ProgramaForm(request.POST, instance=programa)
         if form.is_valid():
             form.save()
-            return redirect("estudiates:detalle_programa", pk=programa.pk)
+            return redirect("estudiantes:detalle_programa", pk=programa.pk)
     else:
         form =ProgramaForm(instance=programa)
         
