@@ -7,10 +7,18 @@
 
 <p><strong>Nombre:</strong> {{ estudiante.nombre }}</p>
 <p><strong>Edad:</strong> {{ estudiante.edad }}</p>
+<p><strong>Programa:</strong> {{ estudiante.programa.nombre }}</p>
 
-<h3>Materias</h3>
+<h3>Materias Inscritas</h3>
 
-<table class="table-custom" border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; color: #fff; background-color: #333;box-shadow: 0 4px 8px rgba(0, 0, 0, 3);">
+<table class="table-custom" border="1" cellpadding="8" cellspacing="0" style="
+    border-collapse: collapse; 
+    width: 100%; 
+    color: #fff; 
+    background-color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+">
     <thead style="background-color: #e84d13;">
         <tr>
             <th>Nombre de la Materia</th>
@@ -30,9 +38,26 @@
         {% endfor %}
     </tbody>
 </table>
-<p>
-<a href="{% url 'estudiantes:editar_estudiante' estudiante.pk %}" class="btn">✏️ Editar</a> |
-<a href="{% url 'estudiantes:eliminar_estudiante' estudiante.pk %}" class="btn">🗑️ Eliminar</a> |
-<a href="{% url 'estudiantes:lista_estudiantes' %}" class="btn">⬅️ Volver</a>
+
+<!-- Mostrar total de materias -->
+{% with total=estudiante.materias.count %}
+    <p><strong>Total de materias inscritas:</strong> {{ total }}</p>
+{% endwith %}
+
+<hr>
+
+<!-- Botones de acción -->
+<p style="margin-top: 20px;">
+    <a href="{% url 'estudiantes:editar_estudiante' estudiante.pk %}" 
+       class="btn" 
+       style="background: #4CAF50; color: white; padding: 8px 14px; border-radius: 6px; text-decoration: none;">✏️ Editar</a>
+
+    <a href="{% url 'estudiantes:eliminar_estudiante' estudiante.pk %}" 
+       class="btn" 
+       style="background: #f44336; color: white; padding: 8px 14px; border-radius: 6px; text-decoration: none;">🗑️ Eliminar</a>
+
+    <a href="{% url 'estudiantes:lista_estudiantes' %}" 
+       class="btn" 
+       style="background: #555; color: white; padding: 8px 14px; border-radius: 6px; text-decoration: none;">⬅️ Volver</a>
 </p>
 {% endblock %}

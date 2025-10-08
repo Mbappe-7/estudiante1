@@ -42,7 +42,14 @@ def detalle_estudiante(request, pk):
         Estudiante.objects.select_related("programa").prefetch_related("materias"),
         pk=pk
     )
-    return render(request, "estudiantes/detalle_estudiante.html", {"estudiante": estudiante})
+    
+    # Total de estudiantes en la base de datos
+    total_estudiantes = Estudiante.objects.count()
+
+    return render(request, "estudiantes/detalle_estudiante.html", {
+        "estudiante": estudiante,
+        "total_estudiantes": total_estudiantes
+    })
 # -------------------------------------------------
 def crear_programa(request):
     if request.method == "POST":
@@ -116,3 +123,5 @@ def eliminar_estudiante(request, pk):
         estudiante.delete()
         return redirect("estudiantes:lista_estudiantes")
     return render(request, "estudiantes/eliminar_estudiante.html", {"estudiante": estudiante})
+
+

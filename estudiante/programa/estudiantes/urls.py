@@ -25,4 +25,6 @@ urlpatterns = [
     
     path("estudiantes/<int:pk>/editar/", views.editar_estudiante, name="editar_estudiante"),
     path("estudiantes/<int:pk>/eliminar/", views.eliminar_estudiante, name="eliminar_estudiante"),
+    
 ]
+
